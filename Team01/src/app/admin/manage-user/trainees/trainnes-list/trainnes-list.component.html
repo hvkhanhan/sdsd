@@ -1,0 +1,42 @@
+<div class="container-fluid">
+  <h2>Quản lý tài khoản Học viên</h2>
+  <br>
+  <a class="create" (click)="onCreate()">
+      <button  class="btn btn-primary">Thêm tài khoản Học viên</button>
+  </a>
+  <br>
+  <input [(ngModel)]="searchText" placeholder="Tìm học viên.." style="width: 30%;margin-top: 10px;margin-left: 36px" class="advancedSearchTextbox form-control">
+  <hr>
+  <select (change)="selectOption($event.target.value)"
+  [(ngModel)]="selected">
+    <option [value]="show.id" *ngFor="let show of options" (click)="optionshow()">
+      {{show.value}}
+    </option>
+  </select>
+  <table class="table table-bordered table-hover text-center">
+      <tr ngclass="btn-primary">
+          <th class="tbl2">Mã học viên</th>
+          <th class="tbl2">Họ tên Học viên</th>
+          <th class="tbl2">Email</th>
+          <th class="tbl2">Số điện thoại</th>
+          <th class="tbl2">Địa chỉ</th>
+          <th class="tbl2">Mật khẩu</th>
+          <th class="tbl2">Chức năng</th>
+      </tr>
+
+      <tr *ngFor="let tra of allTrainee | async | grdFilter: {name: searchText, phone: searchText,  blog: searchText} | paginate: { itemsPerPage: item, currentPage: p }">
+          <td class="tbl2">{{tra.traineeid }}</td>
+          <td class="tbl2">{{tra.name}}</td>
+          <td class="tbl2">{{tra.email}}</td>
+          <td class="tbl2">{{tra.phone}}</td>
+          <td class="tbl2">{{tra.address }}</td>
+          <td class="tbl2">{{tra.password}}</td>
+          <td>
+            <button type="button"  (click)="onEdit(tra)" class="btn btn-warning">Sửa</button>
+
+            <button type="button" (click)="onDelete(tra.traineeid)" class="btn btn-danger">Xóa</button>
+          </td>
+      </tr>
+    </table>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>

@@ -1,0 +1,39 @@
+<div class="container-fluid">
+  <h2>Quản lý khóa học đã được liên hệ</h2>
+  <br>
+  <input [(ngModel)]="searchText" placeholder="Tìm khóa học..." style="width: 30%;margin-top: 10px;margin-left: 36px" class="advancedSearchTextbox form-control">
+    <hr>
+    <select (change)="selectOption($event.target.value)"
+      [(ngModel)]="selected">
+        <option [value]="show.id" *ngFor="let show of options" (click)="selectOption()">
+          {{show.value}}
+        </option>
+    </select>
+    <table class="table table-bordered table-hover text-center">
+        <tr ngclass="btn-primary">
+          <th class="tbl2">Giảng viên</th>
+          <th class="tbl2">Khóa học</th>
+          <th class="tbl2">Ngày bắt đầu</th>
+          <th class="tbl2">Ngày kết thúc</th>
+          <th class="tbl2">Địa chỉ</th>
+          <th class="tbl2">Ghi chú</th>
+          <!--<th class="tbl2">Chức năng</th>-->
+        </tr>
+
+        <tr *ngFor="let ass of allAssigned | async | grdFilter: {mentor: searchText, course: searchText, address: searchText,  blog: searchText}  | paginate: { itemsPerPage: item, currentPage: p }">
+          <td class="tbl2">{{ass.mentorname}}</td>
+          <td class="tbl2">{{ass.course}}</td>
+          <td class="tbl2">{{ass.startday}}</td>
+          <td class="tbl2">{{ass.endday}}</td>
+          <td class="tbl2">{{ass.address}}</td>
+          <td class="tbl2">{{ass.notes}}</td>
+          <!--<td class="tbl2">{{ass.time}}</td>-->
+          <!--<td class="tbl2">
+            <button type="button" (click)="onEdit(ass)" class="btn btn-warning">Sửa</button>
+            <button type="button" (click)="deleteAssign(ass.courseid,ass.mentorid)" class="btn btn-danger">Xóa</button>
+          </td>-->
+        </tr>
+      </table>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+

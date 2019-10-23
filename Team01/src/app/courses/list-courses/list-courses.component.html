@@ -1,0 +1,80 @@
+<div class="container-fluid">
+  <h2>Khóa học của tôi</h2>
+  <div class="form-row">
+    <div class="form-group col-3">
+      <a routerLink="/courses/add">
+        <mat-icon>add</mat-icon>
+      </a>
+    </div>
+    <div class="form-group col-3">
+    </div>
+    <div class="form-group col-3">
+      <!-- <select type="number" class="form-control">
+          <option>Search By Status</option>
+          <option [value]="0">Available</option>
+          <option [value]="1">Contacted</option>
+          <option [value]="2">In Progress</option>
+          <option [value]="3">Finished</option>
+        </select> -->
+    </div>
+    <div class="form-group col-3">
+      <div class="form-group">
+        <div class="input-group">
+          <input [(ngModel)]="searchText" class="form-control input-lg" placeholder="Tìm" />
+          <button class="btn btn-info btn-sm" type="button">
+            <mat-icon>search</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-hover table-striped paginated ">
+      <thead>
+        <tr>
+          <th (click)="change('title')">Tên khóa học
+          </th>
+          <th (click)="change('skill')">Kỹ năng cần học
+          </th>
+          <th (click)="change('time')">Thời lượng dự kiến
+          </th>
+          <th (click)="change('address')">Địa điểm học
+          </th>
+          <th (click)="change('description')">Mô tả
+          </th>
+          <th>Chức năng</th>
+          <th style="text-align: center"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let el of courseService.courseList
+              | grdFilter: {skill: searchText, title: searchText, time: searchText }
+              | paginate: { itemsPerPage: 7, currentPage: p }
+              | orderBy: temp ">
+          <td [routerLink]="['/courses/view/',el.courseid]">{{el.title}}</td>
+          <td [routerLink]="['/courses/view/',el.courseid]">{{el.skill}}</td>
+          <td [routerLink]="['/courses/view/',el.courseid]">{{el.time}}</td>
+          <td [routerLink]="['/courses/view/',el.courseid]">{{el.address}}</td>
+          <td [routerLink]="['/courses/view/',el.courseid]">{{el.description}}</td>
+          
+          <td class="tbl2">
+            &nbsp;
+            <mat-icon [routerLink]="['/courses/edit/',el.courseid]">edit</mat-icon>
+            &nbsp;
+            <mat-icon (click)='onDelete(el.courseid)' >delete</mat-icon>
+          </td>
+          <!-- <td>{{el.status ? '  Actived' : '  Not Actived'}}</td> -->
+          <!--<td [ngSwitch]="el.status">
+            <div *ngSwitchCase=0>Đang chờ</div>
+            <div *ngSwitchCase=1>Đã liên hệ</div>
+            <div *ngSwitchCase=2>Đang dạy</div>
+            <div *ngSwitchCase=3>Đã kết thúc</div>
+          </td>-->
+          <!-- <td>{{el.status}}</td> -->
+
+        </tr>
+    </table>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+</div>

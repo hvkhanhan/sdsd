@@ -1,0 +1,49 @@
+<div class="container-12">
+    <a class="close">
+        <button type="button" class="btn btn-warning" (click)="onClose()"><b>X</b></button>
+    </a>
+    <form [formGroup]="formfroupAdd" (ngSubmit)="onSubmit(formfroupAdd.value)">
+          <div class="modal-header">
+            <h3 class="modal-title" id="exampleModalLabel">Thêm tài khoản giảng viên</h3>
+          </div>
+          <div class="form-group">
+              <input type="text" class="form-control" placeholder="Tên giảng viên" formControlName="name" required>
+              <div class="validation-error" *ngIf="formfroupAdd.get('name').invalid && formfroupAdd.get('name').touched">
+                <div *ngIf="formfroupAdd.get('name').errors['required']">Xin nhập tên giảng viên</div>
+              </div>
+          </div>
+          <div class="form-group">
+              <input type="text" class="form-control" placeholder="Email" formControlName="email" required>
+              <div class="validation-error" *ngIf="formfroupAdd.get('email').invalid && formfroupAdd.get('email').touched">
+                <div *ngIf="formfroupAdd.get('email').errors['required']">Xin nhập Email</div>
+              </div>
+          </div>
+          <div class="form-group">
+              <input type="text" class="form-control" placeholder="Số điện thoại" formControlName="phone" required>
+              <div class="validation-error" *ngIf="formfroupAdd.get('phone').invalid && formfroupAdd.get('phone').touched">
+                <div *ngIf="formfroupAdd.get('phone').errors['required']">Xin nhập Số điện thoại</div>
+              </div>
+          </div>
+          <div class="form-group">
+              <input type="text" class="form-control" placeholder="Địa chỉ" formControlName="address" required>
+              <div class="validation-error" *ngIf="formfroupAdd.get('address').invalid && formfroupAdd.get('address').touched">
+                <div *ngIf="formfroupAdd.get('address').errors['required']">Xin nhập địa chỉ</div>
+              </div>
+          </div>
+          <div class="form-group">
+              <input type="text" class="form-control" placeholder="Mật khẩu" formControlName="password" required>
+              <div class="validation-error" *ngIf="formfroupAdd.get('password').invalid && formfroupAdd.get('password').touched">
+                <div *ngIf="formfroupAdd.get('password').errors['required']">Xin nhập mật khẩu</div>
+              </div>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Chuyên môn" formControlName="idskill" required>
+            <div class="validation-error" *ngIf="formfroupAdd.get('idskill').invalid && formfroupAdd.get('idskill').touched">
+              <div *ngIf="formfroupAdd.get('idskill').errors['required']">Xin nhập chuyên môn</div>
+            </div>
+          </div>
+
+        <button type="submit" class="btn btn-lg btn-success btn-block" [disabled]="formfroupAdd.invalid">Thêm Giảng Viên</button>
+
+    </form>
+</div>

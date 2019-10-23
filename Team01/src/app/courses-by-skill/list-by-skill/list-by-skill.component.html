@@ -1,0 +1,49 @@
+<div class="container-fluid">
+  <h2>Khóa học liên quan</h2>
+  <br>
+  <div class="form-group">
+    <input [(ngModel)]="searchText" placeholder="Tìm.." class="advancedSearchTextbox">
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th>Tên khóa học</th>
+          <th>Thành phố </th>
+          <th>Địa chỉ</th>
+          <th>Thời lượng</th>
+          <th>Trạng thái</th>
+          <th> </th>
+        </tr>
+      </thead>
+
+      <tr *ngFor="let all of courseService.relatedList
+        | grdFilter: {title: searchText, time: searchText,  city: searchText }
+        | paginate: { itemsPerPage: 7, currentPage: p } ">
+        <td>{{all.title}}</td>
+        <td>{{all.city}}</td>
+        <td>{{all.address}}</td>
+        <td>{{all.time}}</td>
+        <td [ngSwitch]="all.status">
+          <div *ngSwitchCase="0">Đang chờ</div>
+          <div *ngSwitchCase="1">Đã liên hệ</div>
+          <div *ngSwitchCase="2">Đang dạy</div>
+          <div *ngSwitchCase="3">Đã kết thúc</div>
+        </td>
+        <td [ngSwitch]="all.status" style="text-align: center">
+          <button class="btn-sm btn-primary" matTooltip="Bấm vào để liên hệ với Học viên"
+            (click)="onSend(all.courseid)">
+            Liên hệ
+          </button>
+
+          &nbsp;
+          <button class="btn-sm btn-info" [routerLink]="['accept/',all.courseid]">
+            Nhận dạy
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>

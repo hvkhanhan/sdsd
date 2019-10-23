@@ -1,0 +1,78 @@
+<div class="container-12">
+    <a class="close">
+        <button type="submit" class="btn btn-dark" (click)="onClose()">X</button>
+    </a>
+    <form [formGroup]="formfroupEdit" (ngSubmit)="onFormSubmit(formfroupEdit.value)">
+        <div class="modal-header">
+            <h3 class="modal-title" id="exampleModalLabel">Cập nhật khóa học</h3>
+        </div>
+
+        <div class="form-group">
+            <label for="">Mã khóa học: </label>
+            <input type="text" class="form-control" placeholder="CourseId" formControlName="courseid" required>
+            <div class="validation-error" *ngIf="formfroupEdit.get('courseid').invalid && formfroupEdit.get('courseid').touched">
+              <div *ngIf="formfroupEdit.get('courseid').errors['required']">Xin nhập mã khóa học</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="">Học viên: </label>
+            <input type="text" class="form-control" placeholder="nametrainee" formControlName="nametrainee" required>
+            <div class="validation-error" *ngIf="formfroupEdit.get('nametrainee').invalid && formfroupEdit.get('nametrainee').touched">
+              <div *ngIf="formfroupEdit.get('nametrainee').errors['required']">Xin nhập tên học viên</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="">Khóa học: </label>
+            <input type="text" class="form-control" placeholder="tên khóa học" formControlName="title" required>
+            <div class="validation-error" *ngIf="formfroupEdit.get('title').invalid && formfroupEdit.get('title').touched">
+              <div *ngIf="formfroupEdit.get('title').errors['required']"> Xin nhập tên khóa học </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="">Mô tả: </label>
+            <input type="text" class="form-control" placeholder="Mô tả" formControlName="description" required>
+            <div class="validation-error" *ngIf="formfroupEdit.get('description').invalid && formfroupEdit.get('description').touched">
+              <div *ngIf="formfroupEdit.get('description').errors['required']"> Xin nhập mô tả khóa học</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="">Thành phố: </label>
+            <input type="text" class="form-control" placeholder="Thành phố" formControlName="city" required>
+            <div class="validation-error" *ngIf="formfroupEdit.get('city').invalid && formfroupEdit.get('city').touched">
+              <div *ngIf="formfroupEdit.get('city').errors['required']"> Xin nhập thành phố</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="">Địa chỉ: </label>
+            <input type="text" class="form-control" placeholder="Địa chỉ" formControlName="address" required>
+            <div class="validation-error" *ngIf="formfroupEdit.get('address').invalid && formfroupEdit.get('address').touched">
+              <div *ngIf="formfroupEdit.get('address').errors['required']"> Xin nhập địa chỉ</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="">Thời lượng dự kiến: </label>
+            <input type="text" class="form-control" placeholder="Thời lượng dự kiến" formControlName="time" required>
+            <div class="validation-error" *ngIf="formfroupEdit.get('time').invalid && formfroupEdit.get('time').touched">
+              <div *ngIf="formfroupEdit.get('time').errors['required']"> Xin nhập thời lượng dự kiến</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="">Kỹ năng: </label>
+            <input type="text" class="form-control" placeholder="Kỹ năng cần học" formControlName="idskill" required>
+            <div class="validation-error" *ngIf="formfroupEdit.get('idskill').invalid && formfroupEdit.get('idskill').touched">
+              <div *ngIf="formfroupEdit.get('idskill').errors['required']"> Xin nhập kỹ năng cần học</div>
+            </div>
+        </div>
+        <input type="hidden" class="form-control" formControlName="createddate">
+        <input type="hidden" class="form-control" formControlName="status">
+        <input type="hidden" class="form-control" formControlName="trainee_course">
+
+          <button type="submit" [disabled]="!formfroupEdit.valid" class="btn btn-lg btn-success btn-block" keyup.enter="onSubmit(form)">Cập nhật khóa học</button>
+    </form>
+</div>

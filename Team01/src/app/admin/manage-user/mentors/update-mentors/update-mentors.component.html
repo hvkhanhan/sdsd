@@ -1,0 +1,64 @@
+<div class="container-12">
+    <a class="close">
+        <button type="submit" class="btn btn-dark" (click)="onClose()">X</button>
+    </a>
+    <form [formGroup]="formfroupEdit" (ngSubmit)="onSubmit(formfroupEdit.value)">
+          <div class="modal-header">
+            <h3 class="modal-title" id="exampleModalLabel">Cập nhật tài khoản Giảng Viên</h3>
+          </div>
+          
+          <div class="form-group">
+              <label for="">Tên Giảng Viên: </label>
+              <input type="text" class="form-control" placeholder="Tên Giảng Viên" formControlName="name" required>
+              <div class="validation-error" *ngIf="formfroupEdit.get('name').invalid && formfroupEdit.get('name').touched">
+                <div *ngIf="formfroupEdit.get('name').errors['required']">Xin nhập tên Giảng Viên</div>
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="">Email: </label>
+              <input type="text" class="form-control" placeholder="Email" formControlName="email" required>
+              <div class="validation-error" *ngIf="formfroupEdit.get('email').invalid && formfroupEdit.get('email').touched">
+                <div *ngIf="formfroupEdit.get('email').errors['required']">Xin nhập Email Giảng Viên</div>
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="">Số điện thoại: </label>
+              <input type="text" class="form-control" placeholder="Số điện thoại" formControlName="phone" required>
+              <div class="validation-error" *ngIf="formfroupEdit.get('phone').invalid && formfroupEdit.get('phone').touched">
+                <div *ngIf="formfroupEdit.get('phone').errors['required']">Xin nhập số điện thoại</div>
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="">Địa chỉ: </label>
+              <input type="text" class="form-control" placeholder="Địa chỉ" formControlName="address" required>
+              <div class="validation-error" *ngIf="formfroupEdit.get('address').invalid && formfroupEdit.get('address').touched">
+                <div *ngIf="formfroupEdit.get('address').errors['required']">Xin nhập địa chỉ</div>
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="">Mật khẩu: </label>
+              <input type="text" class="form-control" placeholder="Mật khẩu" formControlName="password" required>
+              <div class="validation-error" *ngIf="formfroupEdit.get('password').invalid && formfroupEdit.get('password').touched">
+                <div *ngIf="formfroupEdit.get('password').errors['required']">Xin nhập mật khẩu</div>
+              </div>
+          </div>
+          <!--<div class="form-group">
+              <label for="">Skill: </label>
+              <input type="text" class="form-control" placeholder="skill" formControlName="skill" required>
+              <div class="validation-error" *ngIf="formfroupEdit.get('skill').invalid && formfroupEdit.get('skill').touched">
+                <div *ngIf="formfroupEdit.get('skill').errors['required']">skill is required</div>
+              </div>
+          </div>-->
+          <input type="hidden" formControlName="activationcode">
+          <div class="form-group">
+              <label for="">Chuyên môn: </label>
+            <input type="text" class="form-control" placeholder="Chuyên môn" formControlName="skill" required>
+            <div class="validation-error" *ngIf="formfroupEdit.get('skill').invalid && formfroupEdit.get('skill').touched">
+              <div *ngIf="formfroupEdit.get('skill').errors['required']">Xin nhập chuyên môn</div>
+            </div>
+          </div>
+
+        <button type="submit" class="btn btn-lg btn-success btn-block" [disabled]="formfroupEdit.invalid">Cập nhật</button>
+
+    </form>
+</div>

@@ -1,0 +1,85 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3">
+      <h1><strong>Thông tin khóa học</strong></h1>
+      <!-- <span class="title">Thông tin chi tiết khóa học</span> -->
+
+    </div>
+    <div class="col-md-6">
+      <form [formGroup]="ViewCourseForm">
+        <div class="form-group">
+
+          <input type="hidden" class="form-control" formControlName="courseid">
+
+          <input type="hidden" class="form-control" formControlName="trainee_course">
+
+          <label>Tên khóa học</label>
+          <input disabled type="text" class="form-control" placeholder="Tên khóa học" formControlName="title" required>
+          <!-- <div class="validation-error" *ngIf="title.invalid && title.touched">title is required. </div> -->
+        </div>
+        <div class="form-group">
+          <label>Ngày tạo</label>
+          <input disabled class="form-control" formControlName="createddate">
+        </div>
+        <div class="form-group">
+          <label>Thành phố</label>
+          <textarea disabled type="text" class="form-control" placeholder="Thành phố" formControlName="city"
+            required></textarea>
+          <!-- <div class="validation-error" *ngIf="city.invalid && city.touched">cyti is required. </div> -->
+        </div>
+        <div class="form-group">
+          <label>Mô tả</label>
+          <textarea disabled type="text" class="form-control" placeholder="Mô tả" formControlName="description"
+            required></textarea>
+          <!-- <div class="validation-error" *ngIf="description.invalid && description.touched">description is required. </div> -->
+        </div>
+        <div class="form-group ">
+          <label>Địa chỉ</label>
+          <textarea disabled type="text" rows="4" placeholder="Địa chỉ" formControlName="address" class="form-control"
+            required></textarea>
+          <!-- <div class="validation-error" *ngIf="address.invalid && address.touched">Address is required.</div> -->
+        </div>
+        <div class="form-row">
+          <div class="form-group col-6">
+            <label>Thời gian</label>
+            <input disabled type="text" class="form-control" placeholder="Thời gian" formControlName="time"
+              class="form-control" required>
+            <!-- <div class="validation-error" *ngIf="time.invalid && time.touched">time is required.</div> -->
+          </div>
+
+          <div class="form-group col-6">
+            <label>Kỹ năng</label>
+            <select type="number" formControlName="idskill" class="form-control" disabled>
+              <option *ngFor="let skill of courseService.skillList" [value]="skill.idskill">
+                {{skill.skillname}}</option>
+              <!-- <div class="validation-error" *ngIf="Categoryid.invalid && Categoryid.touched">Category is required.</div> -->
+            </select>
+          </div>
+          &nbsp;
+          <button class="btn-lg btn-info btn-block" (click)="onAccept()" *ngIf="!show">Nhận dạy</button>
+        </div>
+        <!-- list course theo id skill -->
+      </form>
+    </div>
+    <div class="col-sm-3">
+      <div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-4 course-item" *ngFor="let item of course.courseList
+      | grdFilter: { title: searchText}
+      | paginate: { itemsPerPage: 6, currentPage: p }" value="item.courseid">
+
+    <div class="blog-box">
+      <a routerLink="/details/{{item.courseid}}"> <img src="assets/Images/{{item.image_course}}"
+          style="width: auto;height: 210px; " alt="blog1" class="img-course" /></a>
+      <h3>{{item.title}}</h3>
+      <p>{{item.image_course}}</p>
+      <p>Khóa học dạy về chương trình : {{item.description}} <br> Thời gian khóa học : {{item.time}}</p>
+    </div>
+  </div>
+</div>

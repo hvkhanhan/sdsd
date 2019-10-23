@@ -1,0 +1,34 @@
+<div class="container-fluid">
+  <h2>Khóa học đã tiếp nhận</h2>
+  <br>
+  <input [(ngModel)]="searchText" placeholder="Tìm.." class="advancedSearchTextbox">
+  <hr>
+  <table class="table">
+    <tr ngclass="btn-primary">
+      <th class="tbl2">Giảng viên</th>
+      <th class="tbl2">Học viên</th>
+      <th class="tbl2">Tên khóa học</th>
+      <th class="tbl2">Ngày bắt đầu</th>
+      <th class="tbl2">Ngày kết thúc</th>
+      <th class="tbl2">Địa chỉ</th>
+      <th class="tbl2">Chức năng</th>
+    </tr>
+
+    <tr
+      *ngFor="let ass of allAssigned | async | grdFilter: {name: searchText, traineename: searchText, title: searchText, address: searchText}  | paginate: { itemsPerPage: 5, currentPage: p }">
+      <td class="tbl2">{{ass.name}}</td>
+      <td class="tbl2">{{ass.traineename}}</td>
+      <td class="tbl2">{{ass.title}}</td>
+      <td class="tbl2">{{ass.startday}}</td>
+      <td class="tbl2">{{ass.endday}}</td>
+      <td class="tbl2">{{ass.address}}</td>
+      <td class="tbl2">
+        &nbsp;
+        <mat-icon [routerLink]="['assigned-time/',ass.courseid]">edit</mat-icon>
+        &nbsp;
+        <mat-icon (click)='deleteassign(ass.courseid)' >delete</mat-icon>
+      </td>
+    </tr>
+  </table>
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>

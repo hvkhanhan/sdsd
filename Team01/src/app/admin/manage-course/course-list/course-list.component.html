@@ -1,0 +1,47 @@
+<div class="container-fluid">
+    <h2>Quản lý khóa học</h2>
+
+    <br>
+    <input [(ngModel)]="searchText" placeholder="Tìm khóa học..." style="width: 30%;margin-top: 10px;margin-left: 36px" class="advancedSearchTextbox form-control">
+      <hr>
+      <select (change)="selectOption($event.target.value)"
+      [(ngModel)]="selected">
+        <option [value]="show.id" *ngFor="let show of options" (click)="selectOption()">
+          {{show.value}}
+        </option>
+      </select>
+      <table class="table table-bordered table-hover text-center">
+          <tr ngclass="btn-primary">
+            <th class="tbl2">Mã khóa học</th>
+            <th class="tbl2">Tên khóa học</th>
+            <th class="tbl2">Mô tả</th>
+            <th class="tbl2">Thành phố</th>
+            <th class="tbl2">Địa chỉ</th>
+            <th class="tbl2">Thời lượng</th>
+            <th class="tbl2">Ngày tạo</th>
+            <th class="tbl2">Kỹ năng</th>
+            <th class="tbl2">Học viên</th>
+            <!--<th class="tbl2">Chức năng</th>-->
+          </tr>
+
+          <tr *ngFor="let cou of allCourse | async | grdFilter: {title: searchText, blog: searchText}  | paginate: { itemsPerPage: item, currentPage: p }">
+            <td class="tbl2">{{cou.courseid }}</td>
+            <td class="tbl2">{{cou.title}}</td>
+            <td class="tbl2">{{cou.description}}</td>
+            <td class="tbl2">{{cou.city}}</td>
+            <td class="tbl2">{{cou.address}}</td>
+            <td class="tbl2">{{cou.time}}</td>
+            <td class="tbl2">{{cou.createddate}}</td>
+            <td class="tbl2">{{cou.skill}}</td>
+            <td class="tbl2">{{cou.trainee}}</td>
+            <!--<td class="tbl2">
+              <button type="button" (click)="onEdit(cou)" class="btn btn-warning">Sửa</button>
+              <button type="button" (click)="deleteCourse(cou.courseid)" class="btn btn-danger">Xóa</button>
+            </td>-->
+          </tr>
+        </table>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+
+
+

@@ -1,0 +1,31 @@
+<div class="container-fluid">
+  <h2>Quản lý loại khóa học</h2>
+  <br>
+  <a class="create" (click)="onCreate()">
+      <button type="button" class="btn btn-primary" >
+          Thêm loại khóa học
+      </button>
+  </a>
+  <br>
+  <input [(ngModel)]="searchText" placeholder="Tìm loại khóa học..." style="width: 30%;margin-top: 10px;margin-left: 36px" class="advancedSearchTextbox form-control">
+    <hr>
+
+      <table class="table table-bordered table-hover text-center" >
+        <tr ngclass="btn-primary">
+          <th class="tbl2">Mã loại</th>
+          <th class="tbl2">Tên loại</th>
+          <th class="tbl2">Chức năng</th>
+        </tr>
+        <tr *ngFor="let cate of allCategory | async | grdFilter: {categoryname: searchText, blog: searchText}  | paginate: { itemsPerPage: item, currentPage: p }">
+          <td class="tbl2">{{cate.categoryid}}</td>
+          <td class="tbl2">{{cate.categoryname}}</td>
+          <td class="tbl2">
+            <button type="button"  (click)="onEdit(cate)" class="btn btn-warning">Sửa</button>
+            <button type="button" (click)="deleteCategory(cate.categoryid)" class="btn btn-danger">Xóa</button>
+          </td>
+        </tr>
+      </table>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
+
+
